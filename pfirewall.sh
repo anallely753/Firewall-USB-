@@ -1,6 +1,7 @@
 #!/bin/bash
 
 touch white 
+
 touch black
 
 usb=$(dmesg|tail -n 15 | egrep Serial | awk '{print $5'})
@@ -25,5 +26,17 @@ echo "$usb" >> white
 mount /dev/sdb /media/usb
 exit
 ;;
+(2)
+zenity --info --text "Tu USB se ha agregado con exito a la lista negra"
+echo "$usb"  >> black
+mount /dev/sdb /media/usb
+exit
+;;
+(*)
+zenity --info --text "Opcion invalida"
+exit
+
+esac
+fi
 
 
